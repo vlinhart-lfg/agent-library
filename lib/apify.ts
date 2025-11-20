@@ -43,62 +43,80 @@ export async function scrapeScenario(
     const actorId = process.env.APIFY_ACTOR_ID || 'apify/web-scraper';
 
     // Run the actor with pageFunction as string
+    // NOTE: pageFunction runs in browser context, NOT with Puppeteer page object
     const pageFunction = `async function pageFunction(context) {
-      const { page, request } = context;
+      const { request, log, waitFor, jQuery: $ } = context;
 
-      // Wait for page to load - use selector instead of timeout
+      // Wait for page to load dynamic content
       try {
-        await page.waitForSelector('body', { timeout: 10000 });
+        await waitFor(5000); // Wait 5 seconds for JS to render
       } catch (e) {
-        console.log('Page load timeout, continuing anyway...');
+        log.info('Wait timeout, continuing...');
       }
 
-      // Additional wait for dynamic content
-      await new Promise(resolve => setTimeout(resolve, 3000));
-
-      // Extract title
+      // Extract title using jQuery
       let title = '';
       try {
-        const titleEl = await page.$('h1, [data-testid="scenario-title"], .scenario-title');
-        if (titleEl) {
-          title = await page.evaluate(el => el.textContent, titleEl);
-        }
+        title = $('h1').first().text() ||
+                $('[data-testid="scenario-title"]').first().text() ||
+                $('.scenario-title').first().text() ||
+                $('title').first().text() ||
+                document.title;
       } catch (e) {
-        console.log('Title not found, will use URL slug');
+        log.info('Title extraction failed:', e.message);
       }
 
       // Extract description
       let description = '';
       try {
-        const descEl = await page.$('[data-testid="scenario-description"], .scenario-description, .description');
-        if (descEl) {
-          description = await page.evaluate(el => el.textContent, descEl);
-        }
+        description = $('[data-testid="scenario-description"]').first().text() ||
+                      $('.scenario-description').first().text() ||
+                      $('.description').first().text() ||
+                      $('meta[name="description"]').attr('content') || '';
       } catch (e) {
-        console.log('Description not found');
+        log.info('Description extraction failed:', e.message);
       }
 
-      // Extract apps/services used
+      // Extract apps/services from images in the imt-ui-pkg-icons container
       let apps = '';
       try {
-        const appEls = await page.$$('[data-testid="module-icon"], .module-card, .app-icon');
-        const appNames = [];
-        for (const el of appEls) {
-          const alt = await page.evaluate(e => e.getAttribute('alt'), el);
-          const titleAttr = await page.evaluate(e => e.getAttribute('title'), el);
-          const text = await page.evaluate(e => e.textContent, el);
-          const appName = alt || titleAttr || text;
-          if (appName && !appNames.includes(appName)) {
-            appNames.push(appName.trim());
+        const appNames = new Set();
+
+        // Make.com uses imt-ui-pkg-icons > imt-ui-pkg-icon > div > img structure
+        $('imt-ui-pkg-icons img, imt-ui-pkg-icon img').each(function() {
+          const alt = $(this).attr('alt');
+          const src = $(this).attr('src');
+
+          if (alt && alt.length > 0 && alt.length < 50) {
+            // Clean up the alt text (e.g., "Make AI Content Extractor" -> "Make AI Content Extractor")
+            appNames.add(alt.trim());
+          } else if (src) {
+            // Try to extract app name from src path (e.g., /static/img/packages/make-ai-extractors_64.png)
+            const match = src.match(/packages\/([^_/]+)/);
+            if (match) {
+              const appName = match[1].replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+              appNames.add(appName);
+            }
           }
+        });
+
+        // Fallback: try general selectors
+        if (appNames.size === 0) {
+          $('[class*="pkg-icon"] img, .app-icon img, [class*="module"] img').each(function() {
+            const alt = $(this).attr('alt');
+            if (alt && alt.length > 0 && alt.length < 50) {
+              appNames.add(alt.trim());
+            }
+          });
         }
-        apps = appNames.join(', ');
+
+        apps = Array.from(appNames).join(', ');
       } catch (e) {
-        console.log('Apps not found');
+        log.info('Apps extraction failed:', e.message);
       }
 
       // If no title found, use URL slug as fallback
-      if (!title) {
+      if (!title || title.trim().length === 0) {
         const urlParts = request.url.split('/');
         const slug = urlParts[urlParts.length - 1];
         title = slug
