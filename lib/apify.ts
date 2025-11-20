@@ -42,76 +42,82 @@ export async function scrapeScenario(
     // Use Apify Web Scraper actor
     const actorId = process.env.APIFY_ACTOR_ID || 'apify/web-scraper';
 
-    // Run the actor
+    // Run the actor with pageFunction as string
+    const pageFunction = `async function pageFunction(context) {
+      const { page, request } = context;
+
+      // Wait for page to load - use selector instead of timeout
+      try {
+        await page.waitForSelector('body', { timeout: 10000 });
+      } catch (e) {
+        console.log('Page load timeout, continuing anyway...');
+      }
+
+      // Additional wait for dynamic content
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      // Extract title
+      let title = '';
+      try {
+        const titleEl = await page.$('h1, [data-testid="scenario-title"], .scenario-title');
+        if (titleEl) {
+          title = await page.evaluate(el => el.textContent, titleEl);
+        }
+      } catch (e) {
+        console.log('Title not found, will use URL slug');
+      }
+
+      // Extract description
+      let description = '';
+      try {
+        const descEl = await page.$('[data-testid="scenario-description"], .scenario-description, .description');
+        if (descEl) {
+          description = await page.evaluate(el => el.textContent, descEl);
+        }
+      } catch (e) {
+        console.log('Description not found');
+      }
+
+      // Extract apps/services used
+      let apps = '';
+      try {
+        const appEls = await page.$$('[data-testid="module-icon"], .module-card, .app-icon');
+        const appNames = [];
+        for (const el of appEls) {
+          const alt = await page.evaluate(e => e.getAttribute('alt'), el);
+          const titleAttr = await page.evaluate(e => e.getAttribute('title'), el);
+          const text = await page.evaluate(e => e.textContent, el);
+          const appName = alt || titleAttr || text;
+          if (appName && !appNames.includes(appName)) {
+            appNames.push(appName.trim());
+          }
+        }
+        apps = appNames.join(', ');
+      } catch (e) {
+        console.log('Apps not found');
+      }
+
+      // If no title found, use URL slug as fallback
+      if (!title) {
+        const urlParts = request.url.split('/');
+        const slug = urlParts[urlParts.length - 1];
+        title = slug
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      }
+
+      return {
+        url: request.url,
+        title: title.trim(),
+        description: description.trim(),
+        apps: apps.trim(),
+      };
+    }`;
+
     const run = await client.actor(actorId).call({
       startUrls: [{ url: makeScenarioUrl }],
-      pageFunction: async function pageFunction(context: any) {
-        const { page, request } = context;
-
-        // Wait for page to load
-        await page.waitForTimeout(3000);
-
-        // Extract title
-        let title = '';
-        try {
-          const titleEl = await page.$('h1, [data-testid="scenario-title"], .scenario-title');
-          if (titleEl) {
-            title = await page.evaluate((el: any) => el.textContent, titleEl);
-          }
-        } catch (e) {
-          console.log('Title not found, will use URL slug');
-        }
-
-        // Extract description
-        let description = '';
-        try {
-          const descEl = await page.$(
-            '[data-testid="scenario-description"], .scenario-description, .description'
-          );
-          if (descEl) {
-            description = await page.evaluate((el: any) => el.textContent, descEl);
-          }
-        } catch (e) {
-          console.log('Description not found');
-        }
-
-        // Extract apps/services used (from module cards or labels)
-        let apps = '';
-        try {
-          const appEls = await page.$$('[data-testid="module-icon"], .module-card, .app-icon');
-          const appNames = [];
-          for (const el of appEls) {
-            const alt = await page.evaluate((e: any) => e.getAttribute('alt'), el);
-            const title = await page.evaluate((e: any) => e.getAttribute('title'), el);
-            const text = await page.evaluate((e: any) => e.textContent, el);
-            const appName = alt || title || text;
-            if (appName && !appNames.includes(appName)) {
-              appNames.push(appName.trim());
-            }
-          }
-          apps = appNames.join(', ');
-        } catch (e) {
-          console.log('Apps not found');
-        }
-
-        // If no data found, use fallback
-        if (!title) {
-          // Use URL slug as fallback
-          const urlParts = request.url.split('/');
-          const slug = urlParts[urlParts.length - 1];
-          title = slug
-            .split('-')
-            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-        }
-
-        return {
-          url: request.url,
-          title: title.trim(),
-          description: description.trim(),
-          apps: apps.trim(),
-        };
-      },
+      pageFunction: pageFunction,
       proxyConfiguration: {
         useApifyProxy: true,
       },
