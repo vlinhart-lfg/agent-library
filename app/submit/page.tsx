@@ -34,6 +34,7 @@ type SubmitFormData = z.infer<typeof submitFormSchema>;
 
 export default function SubmitPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isScraping, setIsScraping] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [validationResult, setValidationResult] = useState<any>(null);
@@ -43,10 +44,56 @@ export default function SubmitPage() {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
+    setValue
   } = useForm<SubmitFormData>({
     resolver: zodResolver(submitFormSchema),
   });
+
+  const onAutoExtract = async () => {
+    const url = watch('makeScenarioUrl');
+
+    if (!url) {
+      setError('Please enter a Make.com scenario URL first');
+      return;
+    }
+
+    if (!url.includes('make.com/public/shared-scenario')) {
+      setError('Please enter a valid Make.com shared scenario URL');
+      return;
+    }
+
+    setIsScraping(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/scrape', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ makeScenarioUrl: url }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to extract data');
+      }
+
+      const result = await response.json();
+      const { data } = result;
+
+      // Pre-fill form with scraped data
+      if (data.title) setValue('title', data.title);
+      if (data.description) setValue('description', data.description);
+      if (data.apps) setValue('apps', data.apps);
+      if (data.iframeUrl) setValue('iframeUrl', data.iframeUrl);
+      if (data.buttonUrl) setValue('buttonUrl', data.buttonUrl);
+
+      setIsScraping(false);
+    } catch (err: any) {
+      setError(err.message || 'Failed to extract scenario data. Please enter details manually.');
+      setIsScraping(false);
+    }
+  };
 
   const onValidate = async (data: SubmitFormData) => {
     setIsSubmitting(true);
@@ -234,15 +281,28 @@ export default function SubmitPage() {
             <label className="block text-sm font-medium mb-2">
               Make.com Scenario URL <span className="text-red-500">*</span>
             </label>
-            <input
-              {...register('makeScenarioUrl')}
-              type="url"
-              placeholder="https://eu2.make.com/public/shared-scenario/..."
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
+            <div className="flex gap-2">
+              <input
+                {...register('makeScenarioUrl')}
+                type="url"
+                placeholder="https://eu2.make.com/public/shared-scenario/..."
+                className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onAutoExtract}
+                disabled={isScraping}
+              >
+                {isScraping ? 'Extracting...' : '🪄 Auto-Extract'}
+              </Button>
+            </div>
             {errors.makeScenarioUrl && (
               <p className="text-red-500 text-sm mt-1">{errors.makeScenarioUrl.message}</p>
             )}
+            <p className="text-xs text-muted-foreground mt-1">
+              Paste your URL and click Auto-Extract to automatically fill the form
+            </p>
           </div>
 
           {/* Title */}

@@ -61,7 +61,8 @@
     "zod": "3.25.76",
     "openai": "^4.77.0",
     "@octokit/rest": "^21.0.2",
-    "isomorphic-dompurify": "^2.18.0"
+    "isomorphic-dompurify": "^2.18.0",
+    "apify-client": "^2.9.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.9",
