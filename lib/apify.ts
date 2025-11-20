@@ -8,6 +8,7 @@ const client = new ApifyClient({
 export interface ScrapedScenarioData {
   title: string;
   description: string;
+  instructions?: string;
   apps: string;
   category?: string;
   makeScenarioId: string;
@@ -54,61 +55,75 @@ export async function scrapeScenario(
         log.info('Wait timeout, continuing...');
       }
 
-      // Extract title using jQuery
+      // Extract title from h1
       let title = '';
       try {
-        title = $('h1').first().text() ||
-                $('[data-testid="scenario-title"]').first().text() ||
-                $('.scenario-title').first().text() ||
-                $('title').first().text() ||
-                document.title;
+        title = $('h1').first().text().trim();
       } catch (e) {
         log.info('Title extraction failed:', e.message);
       }
 
-      // Extract description
+      // Extract description and instructions from body text
       let description = '';
+      let instructions = '';
       try {
-        description = $('[data-testid="scenario-description"]').first().text() ||
-                      $('.scenario-description').first().text() ||
-                      $('.description').first().text() ||
-                      $('meta[name="description"]').attr('content') || '';
+        const bodyText = document.body.innerText || '';
+        const lines = bodyText.split('\\n').map(l => l.trim()).filter(l => l.length > 0);
+
+        // Find the description (usually the second line after title)
+        if (lines.length > 1) {
+          // Skip the title line and get the next substantial line
+          for (let i = 1; i < Math.min(lines.length, 10); i++) {
+            const line = lines[i];
+            // Look for a line that's a description (> 30 chars, doesn't start with special chars)
+            if (line.length > 30 && !line.startsWith('Use this') && !line.startsWith('\ud83d\udc47')) {
+              description = line;
+              break;
+            }
+          }
+        }
+
+        // Extract instructions section - look for content after "Additional information" or "How to use"
+        const infoIndex = bodyText.indexOf('Additional information');
+        const howToIndex = bodyText.indexOf('How to use this automation');
+
+        let startIndex = -1;
+        if (infoIndex > -1) startIndex = infoIndex;
+        else if (howToIndex > -1) startIndex = howToIndex;
+
+        if (startIndex > -1) {
+          // Get text from that point, limited to reasonable length
+          const instructionsText = bodyText.substring(startIndex, startIndex + 1000);
+          // Clean up and get just the instructions part
+          instructions = instructionsText
+            .split('\\n')
+            .slice(0, 20) // First 20 lines
+            .map(l => l.trim())
+            .filter(l => l.length > 0)
+            .join('\\n');
+        }
       } catch (e) {
         log.info('Description extraction failed:', e.message);
       }
 
-      // Extract apps/services from images in the imt-ui-pkg-icons container
+      // Extract apps from all img alt attributes
       let apps = '';
       try {
         const appNames = new Set();
+        const excludeNames = ['Make Logo', 'Company Logo', 'Powered by', 'Onetrust'];
 
-        // Make.com uses imt-ui-pkg-icons > imt-ui-pkg-icon > div > img structure
-        $('imt-ui-pkg-icons img, imt-ui-pkg-icon img').each(function() {
+        // Get all img elements and check their alt attributes
+        $('img').each(function() {
           const alt = $(this).attr('alt');
-          const src = $(this).attr('src');
 
-          if (alt && alt.length > 0 && alt.length < 50) {
-            // Clean up the alt text (e.g., "Make AI Content Extractor" -> "Make AI Content Extractor")
-            appNames.add(alt.trim());
-          } else if (src) {
-            // Try to extract app name from src path (e.g., /static/img/packages/make-ai-extractors_64.png)
-            const match = src.match(/packages\/([^_/]+)/);
-            if (match) {
-              const appName = match[1].replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-              appNames.add(appName);
+          if (alt && alt.trim().length > 0 && alt.length < 50) {
+            // Exclude common non-app images
+            const isExcluded = excludeNames.some(excluded => alt.includes(excluded));
+            if (!isExcluded) {
+              appNames.add(alt.trim());
             }
           }
         });
-
-        // Fallback: try general selectors
-        if (appNames.size === 0) {
-          $('[class*="pkg-icon"] img, .app-icon img, [class*="module"] img').each(function() {
-            const alt = $(this).attr('alt');
-            if (alt && alt.length > 0 && alt.length < 50) {
-              appNames.add(alt.trim());
-            }
-          });
-        }
 
         apps = Array.from(appNames).join(', ');
       } catch (e) {
@@ -129,6 +144,7 @@ export async function scrapeScenario(
         url: request.url,
         title: title.trim(),
         description: description.trim(),
+        instructions: instructions.trim(),
         apps: apps.trim(),
       };
     }`;
@@ -163,6 +179,7 @@ export async function scrapeScenario(
     return {
       title: scraped.title || 'Untitled Scenario',
       description: scraped.description || '',
+      instructions: scraped.instructions || '',
       apps: scraped.apps || '',
       category: undefined, // Will be determined by AI
       makeScenarioId,
