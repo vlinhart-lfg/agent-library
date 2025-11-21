@@ -7,7 +7,12 @@
     "fullDescription": "A comprehensive customer support agent that leverages natural language understanding to handle customer inquiries across multiple channels. It can automatically categorize tickets, provide instant responses to common questions, and intelligently escalate complex issues to human agents.",
     "previewImage": "/placeholder.svg?height=400&width=600",
     "category": "Customer Service",
-    "tags": ["support", "automation", "tickets", "chat"],
+    "tags": [
+      "support",
+      "automation",
+      "tickets",
+      "chat"
+    ],
     "complexity": "Intermediate",
     "useCase": "Reduce response times and handle high volumes of customer inquiries automatically",
     "createdAt": "2025-01-10",
@@ -25,7 +30,10 @@
       "Business hours and availability",
       "Language preferences and localization"
     ],
-    "relatedTemplates": ["2", "3"]
+    "relatedTemplates": [
+      "2",
+      "3"
+    ]
   },
   {
     "id": "2",
@@ -35,7 +43,12 @@
     "fullDescription": "An intelligent data analysis agent that processes structured data, identifies patterns, generates insights, and creates comprehensive reports. Perfect for analyzing sales data, user behavior, and business metrics.",
     "previewImage": "/placeholder.svg?height=400&width=600",
     "category": "Data Analysis",
-    "tags": ["analytics", "reporting", "data", "insights"],
+    "tags": [
+      "analytics",
+      "reporting",
+      "data",
+      "insights"
+    ],
     "complexity": "Advanced",
     "useCase": "Automate data analysis workflows and generate actionable business insights",
     "createdAt": "2025-01-08",
@@ -53,7 +66,10 @@
       "Visualization preferences",
       "Alert thresholds for anomalies"
     ],
-    "relatedTemplates": ["4", "5"]
+    "relatedTemplates": [
+      "4",
+      "5"
+    ]
   },
   {
     "id": "3",
@@ -63,7 +79,12 @@
     "fullDescription": "A robust content moderation agent that screens user-generated content for inappropriate material, spam, and policy violations. Uses advanced ML models to detect problematic content and maintain community standards.",
     "previewImage": "/placeholder.svg?height=400&width=600",
     "category": "Content Management",
-    "tags": ["moderation", "safety", "content", "automation"],
+    "tags": [
+      "moderation",
+      "safety",
+      "content",
+      "automation"
+    ],
     "complexity": "Intermediate",
     "useCase": "Maintain safe online communities by automatically detecting and flagging inappropriate content",
     "createdAt": "2025-01-12",
@@ -81,7 +102,9 @@
       "Human review triggers",
       "Reporting and analytics settings"
     ],
-    "relatedTemplates": ["1"]
+    "relatedTemplates": [
+      "1"
+    ]
   },
   {
     "id": "4",
@@ -91,7 +114,12 @@
     "fullDescription": "A comprehensive marketing agent that plans, executes, and optimizes marketing campaigns across multiple channels. Analyzes performance metrics, adjusts targeting, and provides actionable recommendations.",
     "previewImage": "/placeholder.svg?height=400&width=600",
     "category": "Marketing",
-    "tags": ["marketing", "campaigns", "automation", "analytics"],
+    "tags": [
+      "marketing",
+      "campaigns",
+      "automation",
+      "analytics"
+    ],
     "complexity": "Advanced",
     "useCase": "Streamline marketing operations and improve campaign ROI through intelligent automation",
     "createdAt": "2025-01-05",
@@ -109,7 +137,10 @@
       "Reporting frequency and format",
       "Integration with CRM and analytics tools"
     ],
-    "relatedTemplates": ["2", "5"]
+    "relatedTemplates": [
+      "2",
+      "5"
+    ]
   },
   {
     "id": "5",
@@ -119,7 +150,12 @@
     "fullDescription": "An intelligent scheduling agent that coordinates meetings across multiple participants, respects time zones, manages calendar conflicts, and sends automated reminders. Integrates with popular calendar platforms.",
     "previewImage": "/placeholder.svg?height=400&width=600",
     "category": "Productivity",
-    "tags": ["scheduling", "calendar", "meetings", "automation"],
+    "tags": [
+      "scheduling",
+      "calendar",
+      "meetings",
+      "automation"
+    ],
     "complexity": "Beginner",
     "useCase": "Eliminate scheduling back-and-forth and automate meeting coordination",
     "createdAt": "2025-01-15",
@@ -137,6 +173,40 @@
       "Notification channels and timing",
       "Time zone handling preferences"
     ],
-    "relatedTemplates": ["1", "3"]
+    "relatedTemplates": [
+      "1",
+      "3"
+    ]
+  },
+  {
+    "id": "6",
+    "slug": "create-linkedin-content-from-articles",
+    "title": "Create LinkedIn content from articles",
+    "description": "Turn long-form articles into LinkedIn posts in seconds. Save time and stay active on LinkedIn by consistently sharing valuable insights.",
+    "fullDescription": "Turn long-form articles into LinkedIn posts in seconds. Save time and stay active on LinkedIn by consistently sharing valuable insights.",
+    "previewImage": "/placeholder.svg?height=400&width=600",
+    "category": "Productivity",
+    "tags": [
+      "make ai content extractor",
+      "tools",
+      "make ai toolkit",
+      "gmail"
+    ],
+    "complexity": "Intermediate",
+    "useCase": "Turn long-form articles into LinkedIn posts in seconds",
+    "createdAt": "2025-11-21",
+    "makeScenarioUrl": "https://eu2.make.com/public/shared-scenario/8MrnUpeVs8c/create-linked-in-content-from-articles",
+    "makeScenarioId": "8MrnUpeVs8c",
+    "makeIframeUrl": "https://eu2.make.com/public/shared-scenario/standalone-inspector-previewer/8MrnUpeVs8c",
+    "makeApps": [
+      "Make AI Content Extractor",
+      "Tools",
+      "Make AI Toolkit",
+      "Gmail"
+    ],
+    "submittedBy": "anonymous",
+    "submittedAt": "2025-11-21T15:17:17.056Z",
+    "status": "published",
+    "aiEnhanced": true
   }
 ]
