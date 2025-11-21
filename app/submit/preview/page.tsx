@@ -101,7 +101,7 @@ export default function PreviewPage() {
                             {data.appIcons && data.appIcons.length > 0 ? (
                                 data.appIcons.map((icon: string, i: number) => (
                                     <div key={i} className="w-12 h-12 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center overflow-hidden p-1">
-                                        <img src={icon} alt="App Icon" className="w-full h-full object-contain" onError={(e) => e.currentTarget.style.display = 'none'} />
+                                        <img src={icon} alt="App Icon" className="w-full h-full object-contain" />
                                     </div>
                                 ))
                             ) : (
