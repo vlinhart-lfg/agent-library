@@ -19,6 +19,11 @@ export async function POST(request: Request) {
       category: body.suggestedCategory || body.category,
       iframeUrl: sanitized.iframeUrl,
       buttonUrl: sanitized.buttonUrl,
+      useCase: body.useCase,
+      complexity: body.complexity,
+      tags: body.tags,
+      instructions: body.instructions,
+      createdDate: body.createdDate,
     };
 
     // Publish to GitHub

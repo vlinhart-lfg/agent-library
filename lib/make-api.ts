@@ -1,4 +1,5 @@
 
+
 export interface ScrapedScenarioData {
     title: string;
     description: string;
@@ -10,6 +11,10 @@ export interface ScrapedScenarioData {
     makeScenarioId: string;
     iframeUrl: string;
     buttonUrl: string;
+    useCase?: string;
+    complexity?: 'Beginner' | 'Intermediate' | 'Advanced';
+    tags?: string[];
+    createdDate?: string;
 }
 
 /**
