@@ -6,6 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SiteHeader } from '@/components/site-header';
 import { Breadcrumbs } from '@/components/breadcrumbs';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export default function PreviewPage() {
     const router = useRouter();
@@ -98,23 +104,44 @@ export default function PreviewPage() {
                     <div className="space-y-8">
                         {/* App Icons */}
                         <div className="flex items-center gap-2">
-                            {data.appIcons && data.appIcons.length > 0 ? (
-                                data.appIcons.map((icon: any, i: number) => (
-                                    <div
-                                        key={i}
-                                        className="w-12 h-12 rounded-full shadow-sm border border-white/20 flex items-center justify-center overflow-hidden p-2"
-                                        style={{ backgroundColor: icon.color || icon }}
-                                    >
-                                        <img
-                                            src={typeof icon === 'string' ? icon : icon.url}
-                                            alt={typeof icon === 'string' ? 'App Icon' : icon.name}
-                                            className="w-full h-full object-contain"
-                                        />
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="h-12"></div>
-                            )}
+                            <TooltipProvider>
+                                {data.appIcons && data.appIcons.length > 0 ? (
+                                    data.appIcons.map((icon: any, i: number) => {
+                                        // Format package name for tooltip (e.g., "google-email" -> "Google Email")
+                                        const formatPackageName = (name: string) => {
+                                            return name
+                                                .split('-')
+                                                .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+                                                .join(' ');
+                                        };
+
+                                        const packageName = typeof icon === 'string' ? 'App' : icon.name;
+                                        const tooltip = formatPackageName(packageName);
+
+                                        return (
+                                            <Tooltip key={i}>
+                                                <TooltipTrigger asChild>
+                                                    <div
+                                                        className="w-12 h-12 rounded-full shadow-sm border border-white/20 flex items-center justify-center overflow-hidden p-2 cursor-help transition-transform hover:scale-110"
+                                                        style={{ backgroundColor: icon.color || icon }}
+                                                    >
+                                                        <img
+                                                            src={typeof icon === 'string' ? icon : icon.url}
+                                                            alt={tooltip}
+                                                            className="w-full h-full object-contain"
+                                                        />
+                                                    </div>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>{tooltip}</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        );
+                                    })
+                                ) : (
+                                    <div className="h-12"></div>
+                                )}
+                            </TooltipProvider>
                         </div>
 
                         {/* Title & Description */}
