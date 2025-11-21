@@ -130,6 +130,19 @@ export async function scrapeScenario(
         log.info('Apps extraction failed:', e.message);
       }
 
+      // Extract interactive iframe URL
+      let interactiveIframeUrl = '';
+      try {
+        // Look for iframe with class "inspector-frame"
+        const iframe = $('iframe.inspector-frame').first();
+        if (iframe.length > 0) {
+          interactiveIframeUrl = iframe.attr('src') || '';
+          log.info('Found iframe URL: ' + interactiveIframeUrl);
+        }
+      } catch (e) {
+        log.info('Iframe extraction failed:', e.message);
+      }
+
       // If no title found, use URL slug as fallback
       if (!title || title.trim().length === 0) {
         const urlParts = request.url.split('/');
@@ -146,6 +159,7 @@ export async function scrapeScenario(
         description: description.trim(),
         instructions: instructions.trim(),
         apps: apps.trim(),
+        interactiveIframeUrl: interactiveIframeUrl.trim(),
       };
     }`;
 
@@ -171,8 +185,15 @@ export async function scrapeScenario(
 
     const scraped = items[0];
 
-    // Generate iframe and button URLs
-    const iframeUrl = makeScenarioUrl.replace('/public/', '/embed/');
+    // Use extracted iframe URL or generate as fallback
+    let iframeUrl = scraped.interactiveIframeUrl || '';
+
+    // Fallback: Generate iframe URL if not extracted
+    // Pattern: https://eu2.make.com/public/shared-scenario/standalone-inspector-previewer/[SCENARIO_ID]
+    if (!iframeUrl) {
+      iframeUrl = `https://eu2.make.com/public/shared-scenario/standalone-inspector-previewer/${makeScenarioId}`;
+    }
+
     const buttonUrl = makeScenarioUrl;
 
     // Return structured data
