@@ -99,9 +99,17 @@ export default function PreviewPage() {
                         {/* App Icons */}
                         <div className="flex items-center gap-2">
                             {data.appIcons && data.appIcons.length > 0 ? (
-                                data.appIcons.map((icon: string, i: number) => (
-                                    <div key={i} className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 shadow-sm border border-purple-200 flex items-center justify-center overflow-hidden p-2">
-                                        <img src={icon} alt="App Icon" className="w-full h-full object-contain" />
+                                data.appIcons.map((icon: any, i: number) => (
+                                    <div
+                                        key={i}
+                                        className="w-12 h-12 rounded-full shadow-sm border border-white/20 flex items-center justify-center overflow-hidden p-2"
+                                        style={{ backgroundColor: icon.color || icon }}
+                                    >
+                                        <img
+                                            src={typeof icon === 'string' ? icon : icon.url}
+                                            alt={typeof icon === 'string' ? 'App Icon' : icon.name}
+                                            className="w-full h-full object-contain"
+                                        />
                                     </div>
                                 ))
                             ) : (
