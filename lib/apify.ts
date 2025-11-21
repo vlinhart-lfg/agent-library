@@ -55,71 +55,103 @@ export async function scrapeScenario(
         log.info('Wait timeout, continuing...');
       }
 
-      // Extract title from h1
+      // Extract title from meta tags or h1
       let title = '';
       try {
-        title = $('h1').first().text().trim();
+        const ogTitle = $('meta[property="og:title"]').attr('content');
+        if (ogTitle) {
+            title = ogTitle.replace(' - Make.com Automation Scenario', '').trim();
+        }
+        
+        if (!title) {
+            title = $('h1').first().text().trim();
+        }
       } catch (e) {
         log.info('Title extraction failed:', e.message);
       }
 
-      // Extract description and instructions from body text
+      // Extract description from meta tags or body
       let description = '';
+      try {
+        const metaDesc = $('meta[name="description"]').attr('content');
+        const ogDesc = $('meta[property="og:description"]').attr('content');
+        
+        if (metaDesc) description = metaDesc;
+        else if (ogDesc) description = ogDesc;
+        
+        // Fallback to body text if meta tags are missing
+        if (!description) {
+             const bodyText = document.body.innerText || '';
+             const lines = bodyText.split('\\n').map(l => l.trim()).filter(l => l.length > 0);
+             if (lines.length > 1) {
+                for (let i = 1; i < Math.min(lines.length, 10); i++) {
+                    const line = lines[i];
+                    if (line.length > 30 && !line.startsWith('Use this') && !line.startsWith('\ud83d\udc47')) {
+                        description = line;
+                        break;
+                    }
+                }
+             }
+        }
+      } catch (e) {
+        log.info('Description extraction failed:', e.message);
+      }
+
+      // Extract instructions
       let instructions = '';
       try {
         const bodyText = document.body.innerText || '';
-        const lines = bodyText.split('\\n').map(l => l.trim()).filter(l => l.length > 0);
-
-        // Find the description (usually the second line after title)
-        if (lines.length > 1) {
-          // Skip the title line and get the next substantial line
-          for (let i = 1; i < Math.min(lines.length, 10); i++) {
-            const line = lines[i];
-            // Look for a line that's a description (> 30 chars, doesn't start with special chars)
-            if (line.length > 30 && !line.startsWith('Use this') && !line.startsWith('\ud83d\udc47')) {
-              description = line;
-              break;
-            }
-          }
-        }
-
-        // Extract instructions section - look for content after "Additional information" or "How to use"
-        const infoIndex = bodyText.indexOf('Additional information');
-        const howToIndex = bodyText.indexOf('How to use this automation');
+        // Case insensitive search for headers
+        const lowerBody = bodyText.toLowerCase();
+        const infoIndex = lowerBody.indexOf('additional information');
+        const howToIndex = lowerBody.indexOf('how to use this automation');
 
         let startIndex = -1;
         if (infoIndex > -1) startIndex = infoIndex;
         else if (howToIndex > -1) startIndex = howToIndex;
 
         if (startIndex > -1) {
-          // Get text from that point, limited to reasonable length
           const instructionsText = bodyText.substring(startIndex, startIndex + 1000);
-          // Clean up and get just the instructions part
           instructions = instructionsText
             .split('\\n')
-            .slice(0, 20) // First 20 lines
+            .slice(0, 20)
             .map(l => l.trim())
             .filter(l => l.length > 0)
             .join('\\n');
         }
       } catch (e) {
-        log.info('Description extraction failed:', e.message);
+         log.info('Instructions extraction failed:', e.message);
       }
 
-      // Extract apps from all img alt attributes
+      // Extract apps from img alt attributes, excluding author
       let apps = '';
       try {
         const appNames = new Set();
         const excludeNames = ['Make Logo', 'Company Logo', 'Powered by', 'Onetrust'];
+        
+        // Identify author name to exclude
+        let authorName = '';
+        try {
+            // Look for the author structure: div.dmo-flex.dmo-items-center > p.title
+            // This is a heuristic based on the current Make.com layout
+            const authorTitle = $('.dmo-flex.dmo-items-center p.title').first();
+            if (authorTitle.length > 0) {
+                authorName = authorTitle.text().trim();
+            }
+        } catch(e) {
+            log.info('Author detection failed', e.message);
+        }
 
-        // Get all img elements and check their alt attributes
         $('img').each(function() {
           const alt = $(this).attr('alt');
 
           if (alt && alt.trim().length > 0 && alt.length < 50) {
             // Exclude common non-app images
             const isExcluded = excludeNames.some(excluded => alt.includes(excluded));
-            if (!isExcluded) {
+            // Exclude author name
+            const isAuthor = authorName && alt.includes(authorName);
+            
+            if (!isExcluded && !isAuthor) {
               appNames.add(alt.trim());
             }
           }
@@ -133,7 +165,6 @@ export async function scrapeScenario(
       // Extract interactive iframe URL
       let interactiveIframeUrl = '';
       try {
-        // Look for iframe with class "inspector-frame"
         const iframe = $('iframe.inspector-frame').first();
         if (iframe.length > 0) {
           interactiveIframeUrl = iframe.attr('src') || '';
@@ -143,7 +174,7 @@ export async function scrapeScenario(
         log.info('Iframe extraction failed:', e.message);
       }
 
-      // If no title found, use URL slug as fallback
+      // Fallback title from slug
       if (!title || title.trim().length === 0) {
         const urlParts = request.url.split('/');
         const slug = urlParts[urlParts.length - 1];
