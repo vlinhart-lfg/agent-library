@@ -106,38 +106,56 @@ export default function PreviewPage() {
                         <div className="flex items-center gap-2">
                             <TooltipProvider>
                                 {data.appIcons && data.appIcons.length > 0 ? (
-                                    data.appIcons.map((icon: any, i: number) => {
-                                        // Format package name for tooltip (e.g., "google-email" -> "Google Email")
-                                        const formatPackageName = (name: string) => {
-                                            return name
-                                                .split('-')
-                                                .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-                                                .join(' ');
-                                        };
+                                    <>
+                                        {data.appIcons.slice(0, 4).map((icon: any, i: number) => {
+                                            // Format package name for tooltip (e.g., "google-email" -> "Google Email")
+                                            const formatPackageName = (name: string) => {
+                                                return name
+                                                    .split('-')
+                                                    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+                                                    .join(' ');
+                                            };
 
-                                        const packageName = typeof icon === 'string' ? 'App' : icon.name;
-                                        const tooltip = formatPackageName(packageName);
+                                            const packageName = typeof icon === 'string' ? 'App' : icon.name;
+                                            const tooltip = formatPackageName(packageName);
 
-                                        return (
-                                            <Tooltip key={i}>
+                                            return (
+                                                <Tooltip key={i}>
+                                                    <TooltipTrigger asChild>
+                                                        <div
+                                                            className="w-12 h-12 rounded-full shadow-sm border border-white/20 flex items-center justify-center overflow-hidden p-2 transition-transform hover:scale-110"
+                                                            style={{ backgroundColor: icon.color || icon }}
+                                                        >
+                                                            <img
+                                                                src={typeof icon === 'string' ? icon : icon.url}
+                                                                alt={tooltip}
+                                                                className="w-full h-full object-contain"
+                                                            />
+                                                        </div>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        <p>{tooltip}</p>
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            );
+                                        })}
+                                        {data.appIcons.length > 4 && (
+                                            <Tooltip>
                                                 <TooltipTrigger asChild>
-                                                    <div
-                                                        className="w-12 h-12 rounded-full shadow-sm border border-white/20 flex items-center justify-center overflow-hidden p-2 transition-transform hover:scale-110"
-                                                        style={{ backgroundColor: icon.color || icon }}
-                                                    >
-                                                        <img
-                                                            src={typeof icon === 'string' ? icon : icon.url}
-                                                            alt={tooltip}
-                                                            className="w-full h-full object-contain"
-                                                        />
+                                                    <div className="w-12 h-12 rounded-full shadow-sm border border-white/20 flex items-center justify-center bg-[#2D8CFF] text-white font-bold text-lg transition-transform hover:scale-110 cursor-default">
+                                                        +{data.appIcons.length - 4}
                                                     </div>
                                                 </TooltipTrigger>
                                                 <TooltipContent>
-                                                    <p>{tooltip}</p>
+                                                    <p>
+                                                        {data.appIcons.slice(4).map((icon: any) =>
+                                                            icon.name.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+                                                        ).join(', ')}
+                                                    </p>
                                                 </TooltipContent>
                                             </Tooltip>
-                                        );
-                                    })
+                                        )}
+                                    </>
                                 ) : (
                                     <div className="h-12"></div>
                                 )}
