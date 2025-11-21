@@ -1,0 +1,7 @@
+{
+  "/api/proxy-image/route": "app/api/proxy-image/route.js",
+  "/api/scrape/route": "app/api/scrape/route.js",
+  "/page": "app/page.js",
+  "/submit/page": "app/submit/page.js",
+  "/submit/preview/page": "app/submit/preview/page.js"
+}

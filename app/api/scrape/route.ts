@@ -1,102 +1,68 @@
 import { NextResponse } from 'next/server';
-import { scrapeScenario } from '@/lib/apify';
+import { z } from 'zod';
+import { getScenarioData } from '@/lib/make-api';
 
-// Rate limiting for scraping (lower limit than submissions)
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const SCRAPE_RATE_LIMIT = parseInt(process.env.RATE_LIMIT_SCRAPES_PER_HOUR || '5');
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in ms
+// Rate limiting map (in-memory)
+const rateLimit = new Map<string, { count: number; timestamp: number }>();
+const RATE_LIMIT_WINDOW = 3600000; // 1 hour
+const MAX_SCRAPES_PER_HOUR = parseInt(process.env.RATE_LIMIT_SCRAPES_PER_HOUR || '50');
 
-function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
-  const now = Date.now();
-  const record = rateLimitMap.get(ip);
-
-  if (!record || now > record.resetAt) {
-    rateLimitMap.set(ip, {
-      count: 1,
-      resetAt: now + RATE_LIMIT_WINDOW,
-    });
-    return { allowed: true };
-  }
-
-  if (record.count >= SCRAPE_RATE_LIMIT) {
-    const retryAfter = Math.ceil((record.resetAt - now) / 1000 / 60);
-    return { allowed: false, retryAfter };
-  }
-
-  record.count++;
-  return { allowed: true };
-}
+const scrapeSchema = z.object({
+  makeScenarioUrl: z.string().url(),
+  enhance: z.boolean().optional(),
+});
 
 export async function POST(request: Request) {
   try {
-    // Get client IP for rate limiting
-    const forwarded = request.headers.get('x-forwarded-for');
-    const ip = forwarded ? forwarded.split(',')[0] : 'unknown';
+    // 1. Rate Limiting
+    const ip = request.headers.get('x-forwarded-for') || 'unknown';
+    const now = Date.now();
+    const userLimit = rateLimit.get(ip) || { count: 0, timestamp: now };
 
-    // Check rate limit
-    const rateLimit = checkRateLimit(ip);
-    if (!rateLimit.allowed) {
+    if (now - userLimit.timestamp > RATE_LIMIT_WINDOW) {
+      userLimit.count = 0;
+      userLimit.timestamp = now;
+    }
+
+    if (userLimit.count >= MAX_SCRAPES_PER_HOUR) {
       return NextResponse.json(
-        {
-          error: `Too many scrape requests. Please try again in ${rateLimit.retryAfter} minutes.`,
-        },
-        {
-          status: 429,
-          headers: {
-            'Retry-After': (rateLimit.retryAfter! * 60).toString(),
-          },
-        }
+        { error: 'Rate limit exceeded. Please try again later.' },
+        { status: 429 }
       );
     }
 
-    // Check if Apify is configured
-    if (!process.env.APIFY_API_TOKEN) {
-      return NextResponse.json(
-        {
-          error: 'Scraping service not configured. Please enter details manually.',
-        },
-        { status: 503 }
-      );
-    }
+    userLimit.count++;
+    rateLimit.set(ip, userLimit);
 
-    // Parse request body
-    const { makeScenarioUrl } = await request.json();
+    // 2. Input Validation
+    const body = await request.json();
+    const validation = scrapeSchema.safeParse(body);
 
-    if (!makeScenarioUrl) {
+    if (!validation.success) {
       return NextResponse.json(
-        {
-          error: 'Make.com scenario URL is required',
-        },
+        { error: 'Invalid URL provided' },
         { status: 400 }
       );
     }
 
-    // Validate URL format
-    if (!makeScenarioUrl.includes('make.com/public/shared-scenario')) {
+    const { makeScenarioUrl } = validation.data;
+
+    // 3. Fetch Data from Make.com API
+    try {
+      const data = await getScenarioData(makeScenarioUrl);
+      return NextResponse.json({ success: true, data });
+    } catch (error: any) {
+      console.error('Scraping failed:', error);
       return NextResponse.json(
-        {
-          error: 'Invalid Make.com scenario URL. Must be a shared scenario URL.',
-        },
-        { status: 400 }
+        { error: error.message || 'Failed to fetch scenario data' },
+        { status: 500 }
       );
     }
 
-    // Scrape the scenario page
-    const scrapedData = await scrapeScenario(makeScenarioUrl);
-
-    // Return scraped data
-    return NextResponse.json({
-      success: true,
-      data: scrapedData,
-      message: 'Scenario data extracted successfully',
-    });
-  } catch (error: any) {
-    console.error('Scrape error:', error);
-
+  } catch (error) {
+    console.error('API Error:', error);
     return NextResponse.json(
-      {
-        error: error.message || 'Failed to extract scenario data. Please enter details manually.',
-      },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

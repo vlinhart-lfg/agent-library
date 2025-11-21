@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/v.linhart/Desktop/agent-library-2/agent-library/app/loading.tsx"],"sourcesContent":["export default function Loading() {\n  return (\n    <div className=\"min-h-screen bg-white flex items-center justify-center\">\n      <div className=\"flex flex-col items-center gap-4\">\n        <div className=\"w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin\" />\n        <p className=\"text-muted-foreground\">Loading...</p>\n      </div>\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;kBACb,cAAA,8OAAC;YAAI,WAAU;;8BACb,8OAAC;oBAAI,WAAU;;;;;;8BACf,8OAAC;oBAAE,WAAU;8BAAwB;;;;;;;;;;;;;;;;;AAI7C"}}]
+}

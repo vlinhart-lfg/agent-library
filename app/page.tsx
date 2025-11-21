@@ -6,6 +6,7 @@ import { AgentTemplate } from "@/lib/types"
 import templatesData from "@/data/templates.json"
 import { Search, X } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -37,7 +38,7 @@ export default function Home() {
     let filtered = templates
 
     if (selectedTags.length > 0) {
-      filtered = filtered.filter((template) => 
+      filtered = filtered.filter((template) =>
         selectedTags.includes(template.category)
       )
     }
@@ -83,25 +84,23 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white my-[-2px]">
       <div className="sticky top-4 z-50 px-6 pt-4">
-        <header className={`rounded-xl border shadow-xl transition-all duration-300 ${
-          isScrolled 
-            ? "bg-gray-100 border-gray-300" 
-            : "bg-[#23282C] border-gray-700/50"
-        }`}>
+        <header className={`rounded-xl border shadow-xl transition-all duration-300 ${isScrolled
+          ? "bg-gray-100 border-gray-300"
+          : "bg-[#23282C] border-gray-700/50"
+          }`}>
           <div className="px-6 py-3 shadow-none">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-8">
                 <div className="flex items-center gap-3">
-                  <Image 
-                    src="/make-logo.svg" 
-                    alt="Make.com" 
-                    width={40} 
+                  <Image
+                    src="/make-logo.svg"
+                    alt="Make.com"
+                    width={40}
                     height={40}
                     className="rounded-lg"
                   />
-                  <span className={`font-semibold text-lg transition-colors duration-300 ${
-                    isScrolled ? "text-gray-900" : "text-white"
-                  }`}>
+                  <span className={`font-semibold text-lg transition-colors duration-300 ${isScrolled ? "text-gray-900" : "text-white"
+                    }`}>
                     Agent library
                   </span>
                 </div>
@@ -118,20 +117,21 @@ export default function Home() {
                   </div>
                 )}
                 <nav className="flex items-center gap-6">
-                  
+
                 </nav>
               </div>
               <div className="flex items-center gap-6">
-                <button className={`text-sm font-medium transition-colors duration-300 ${
-                  isScrolled 
-                    ? "text-gray-900 hover:text-gray-600" 
-                    : "text-white hover:text-gray-300"
-                }`}>
+                <button className={`text-sm font-medium transition-colors duration-300 ${isScrolled
+                  ? "text-gray-900 hover:text-gray-600"
+                  : "text-white hover:text-gray-300"
+                  }`}>
                   Why submit?
                 </button>
-                <button className="bg-gradient-to-b from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-purple-600/30">
-                  Submit
-                </button>
+                <Link href="/submit">
+                  <button className="bg-gradient-to-b from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-purple-600/30">
+                    Submit
+                  </button>
+                </Link>
                 <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-semibold">
                   V
                 </div>
@@ -144,16 +144,16 @@ export default function Home() {
       <div className="bg-gradient-to-r from-[#1C0034] via-[#4E0885] to-[#8F35DD] -mt-20">
         <section className="text-white relative overflow-hidden pt-[200px] pb-[180px] mx-0">
           <div className="absolute inset-0 flex items-center justify-center opacity-[0.08] pointer-events-none">
-            <Image 
-              src="/make-symbol.svg" 
-              alt="" 
-              width={800} 
+            <Image
+              src="/make-symbol.svg"
+              alt=""
+              width={800}
               height={560}
               className="object-contain"
               style={{ filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.15))' }}
             />
           </div>
-          
+
           <div className="container mx-auto px-6 text-center relative z-10">
             <h2 className="text-6xl font-bold mb-4 text-balance">
               Find. Deploy. Scale.
@@ -175,7 +175,7 @@ export default function Home() {
                       <X className="h-4 w-4" />
                     </button>
                   ))}
-                  
+
                   <input
                     type="text"
                     placeholder={selectedTags.length === 0 ? "Search for a template" : ""}
@@ -183,10 +183,10 @@ export default function Home() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="flex-1 min-w-[200px] bg-transparent border-none outline-none text-base text-white placeholder:text-gray-200 px-2"
                   />
-                  
+
                   <div className="flex items-center gap-2 ml-auto">
                     {selectedTags.length > 0 && (
-                      <button 
+                      <button
                         onClick={clearAllTags}
                         className="p-2 hover:bg-gray-700/50 rounded-lg transition-colors"
                       >
@@ -204,11 +204,10 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={clearAllTags}
-                className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
-                  selectedTags.length === 0
-                    ? "bg-purple-600 text-white border-purple-600"
-                    : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700"
-                }`}
+                className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${selectedTags.length === 0
+                  ? "bg-purple-600 text-white border-purple-600"
+                  : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700"
+                  }`}
               >
                 All {templates.length}
               </button>
@@ -216,11 +215,10 @@ export default function Home() {
                 <button
                   key={name}
                   onClick={() => addTag(name)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
-                    selectedTags.includes(name)
-                      ? "bg-purple-600 text-white border-purple-600"
-                      : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${selectedTags.includes(name)
+                    ? "bg-purple-600 text-white border-purple-600"
+                    : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700"
+                    }`}
                 >
                   {name} {count}
                 </button>
