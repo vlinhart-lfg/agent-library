@@ -15,6 +15,7 @@ const submitFormSchema = z.object({
   ),
   title: z.string().min(5, 'Title must be at least 5 characters').max(100, 'Title must be less than 100 characters'),
   description: z.string().min(50, 'Description must be at least 50 characters').max(1000, 'Description must be less than 1000 characters'),
+  instructions: z.string().optional().or(z.literal('')),
   apps: z.string().min(1, 'Please list at least one app'),
   category: z.enum([
     'Marketing',
@@ -84,6 +85,7 @@ export default function SubmitPage() {
       // Pre-fill form with scraped data
       if (data.title) setValue('title', data.title);
       if (data.description) setValue('description', data.description);
+      if (data.instructions) setValue('instructions', data.instructions);
       if (data.apps) setValue('apps', data.apps);
       if (data.iframeUrl) setValue('iframeUrl', data.iframeUrl);
       if (data.buttonUrl) setValue('buttonUrl', data.buttonUrl);
@@ -337,6 +339,23 @@ export default function SubmitPage() {
               <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
             )}
             <p className="text-xs text-muted-foreground mt-1">At least 50 characters. Our AI will enhance this for better clarity.</p>
+          </div>
+
+          {/* Instructions */}
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              Instructions (Optional)
+            </label>
+            <textarea
+              {...register('instructions')}
+              rows={6}
+              placeholder="Step-by-step instructions on how to use this automation scenario..."
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+            {errors.instructions && (
+              <p className="text-red-500 text-sm mt-1">{errors.instructions.message}</p>
+            )}
+            <p className="text-xs text-muted-foreground mt-1">Auto-extracted instructions from Make.com page</p>
           </div>
 
           {/* Apps Used */}
