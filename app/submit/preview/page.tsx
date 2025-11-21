@@ -122,7 +122,7 @@ export default function PreviewPage() {
                                             <Tooltip key={i}>
                                                 <TooltipTrigger asChild>
                                                     <div
-                                                        className="w-12 h-12 rounded-full shadow-sm border border-white/20 flex items-center justify-center overflow-hidden p-2 cursor-help transition-transform hover:scale-110"
+                                                        className="w-12 h-12 rounded-full shadow-sm border border-white/20 flex items-center justify-center overflow-hidden p-2 transition-transform hover:scale-110"
                                                         style={{ backgroundColor: icon.color || icon }}
                                                     >
                                                         <img
