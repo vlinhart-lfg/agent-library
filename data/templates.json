@@ -29,5 +29,40 @@
     "submittedAt": "2025-11-21T15:17:17.056Z",
     "status": "published",
     "aiEnhanced": true
+  },
+  {
+    "id": "7",
+    "slug": "01-make-community-to-slack-ai-suggestion",
+    "title": "01_Make Community to Slack_AI Suggestion",
+    "description": "",
+    "fullDescription": "",
+    "previewImage": "/placeholder.svg?height=400&width=600",
+    "category": "Productivity",
+    "tags": [
+      "discourse",
+      "discourse",
+      "builtin",
+      "openai-gpt-3",
+      "json",
+      "slack"
+    ],
+    "complexity": "Intermediate",
+    "useCase": "",
+    "createdAt": "2025-11-22",
+    "makeScenarioUrl": "https://we.make.com/public/shared-scenario/FqoLspr9Naa/01-make-community-to-slack-ai-suggestion",
+    "makeScenarioId": "FqoLspr9Naa",
+    "makeIframeUrl": "https://we.make.com/public/shared-scenario/standalone-inspector-previewer/FqoLspr9Naa",
+    "makeApps": [
+      "discourse",
+      "discourse",
+      "builtin",
+      "openai-gpt-3",
+      "json",
+      "slack"
+    ],
+    "submittedBy": "anonymous",
+    "submittedAt": "2025-11-22T02:52:07.796Z",
+    "status": "published",
+    "aiEnhanced": true
   }
 ]
