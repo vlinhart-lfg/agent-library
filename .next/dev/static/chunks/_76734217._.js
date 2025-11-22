@@ -116,7 +116,7 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 }),
 "[project]/data/templates.json (json)", ((__turbopack_context__) => {
 
-__turbopack_context__.v([{"id":"1","slug":"customer-support-agent","title":"Customer Support Agent","description":"Automated customer support agent that handles common inquiries, ticket routing, and escalation.","fullDescription":"A comprehensive customer support agent that leverages natural language understanding to handle customer inquiries across multiple channels. It can automatically categorize tickets, provide instant responses to common questions, and intelligently escalate complex issues to human agents.","previewImage":"/placeholder.svg?height=400&width=600","category":"Customer Service","tags":["support","automation","tickets","chat"],"complexity":"Intermediate","useCase":"Reduce response times and handle high volumes of customer inquiries automatically","createdAt":"2025-01-10","setupInstructions":["Install required dependencies from package.json","Configure API keys in your environment variables","Set up webhook endpoints for your communication channels","Customize response templates in the config file","Train the agent with your specific product knowledge base"],"configOptions":["Response tone (formal, casual, friendly)","Escalation thresholds and rules","Supported communication channels","Business hours and availability","Language preferences and localization"],"relatedTemplates":["2","3"]},{"id":"2","slug":"data-analysis-agent","title":"Data Analysis Agent","description":"Automated data processing and insights generation from structured datasets.","fullDescription":"An intelligent data analysis agent that processes structured data, identifies patterns, generates insights, and creates comprehensive reports. Perfect for analyzing sales data, user behavior, and business metrics.","previewImage":"/placeholder.svg?height=400&width=600","category":"Data Analysis","tags":["analytics","reporting","data","insights"],"complexity":"Advanced","useCase":"Automate data analysis workflows and generate actionable business insights","createdAt":"2025-01-08","setupInstructions":["Connect your data sources (databases, APIs, files)","Configure data schemas and mappings","Set up analysis parameters and KPIs","Configure report generation templates","Schedule automated analysis runs"],"configOptions":["Data source connections","Analysis frequency and triggers","Report format and delivery method","Visualization preferences","Alert thresholds for anomalies"],"relatedTemplates":["4","5"]},{"id":"3","slug":"content-moderator-agent","title":"Content Moderator Agent","description":"Automated content moderation for user-generated content across platforms.","fullDescription":"A robust content moderation agent that screens user-generated content for inappropriate material, spam, and policy violations. Uses advanced ML models to detect problematic content and maintain community standards.","previewImage":"/placeholder.svg?height=400&width=600","category":"Content Management","tags":["moderation","safety","content","automation"],"complexity":"Intermediate","useCase":"Maintain safe online communities by automatically detecting and flagging inappropriate content","createdAt":"2025-01-12","setupInstructions":["Define your content policies and guidelines","Configure moderation thresholds and actions","Set up webhook integrations with your platform","Train custom classifiers for domain-specific content","Configure human review workflows for edge cases"],"configOptions":["Moderation strictness levels","Content categories to monitor","Auto-action rules (flag, hide, delete)","Human review triggers","Reporting and analytics settings"],"relatedTemplates":["1"]},{"id":"4","slug":"marketing-campaign-agent","title":"Marketing Campaign Agent","description":"Automated campaign management, optimization, and performance tracking.","fullDescription":"A comprehensive marketing agent that plans, executes, and optimizes marketing campaigns across multiple channels. Analyzes performance metrics, adjusts targeting, and provides actionable recommendations.","previewImage":"/placeholder.svg?height=400&width=600","category":"Marketing","tags":["marketing","campaigns","automation","analytics"],"complexity":"Advanced","useCase":"Streamline marketing operations and improve campaign ROI through intelligent automation","createdAt":"2025-01-05","setupInstructions":["Connect your marketing platforms (email, social, ads)","Configure campaign templates and messaging","Set up audience segments and targeting rules","Define performance goals and KPIs","Configure A/B testing parameters"],"configOptions":["Supported marketing channels","Budget allocation strategies","Optimization algorithms","Reporting frequency and format","Integration with CRM and analytics tools"],"relatedTemplates":["2","5"]},{"id":"5","slug":"scheduling-coordinator-agent","title":"Scheduling Coordinator Agent","description":"Smart meeting scheduler that handles availability, conflicts, and preferences.","fullDescription":"An intelligent scheduling agent that coordinates meetings across multiple participants, respects time zones, manages calendar conflicts, and sends automated reminders. Integrates with popular calendar platforms.","previewImage":"/placeholder.svg?height=400&width=600","category":"Productivity","tags":["scheduling","calendar","meetings","automation"],"complexity":"Beginner","useCase":"Eliminate scheduling back-and-forth and automate meeting coordination","createdAt":"2025-01-15","setupInstructions":["Connect your calendar service (Google, Outlook, etc.)","Set your availability preferences and working hours","Configure meeting types and durations","Set up notification and reminder preferences","Add team members and their calendars"],"configOptions":["Working hours and availability windows","Buffer time between meetings","Meeting type templates","Notification channels and timing","Time zone handling preferences"],"relatedTemplates":["1","3"]}]);}),
+__turbopack_context__.v([{"id":"1","slug":"customer-support-agent","title":"Customer Support Agent","description":"Automated customer support agent that handles common inquiries, ticket routing, and escalation.","fullDescription":"A comprehensive customer support agent that leverages natural language understanding to handle customer inquiries across multiple channels. It can automatically categorize tickets, provide instant responses to common questions, and intelligently escalate complex issues to human agents.","previewImage":"/placeholder.svg?height=400&width=600","category":"Customer Service","tags":["support","automation","tickets","chat"],"complexity":"Intermediate","useCase":"Reduce response times and handle high volumes of customer inquiries automatically","createdAt":"2025-01-10","setupInstructions":["Install required dependencies from package.json","Configure API keys in your environment variables","Set up webhook endpoints for your communication channels","Customize response templates in the config file","Train the agent with your specific product knowledge base"],"configOptions":["Response tone (formal, casual, friendly)","Escalation thresholds and rules","Supported communication channels","Business hours and availability","Language preferences and localization"],"relatedTemplates":["2","3"]},{"id":"2","slug":"data-analysis-agent","title":"Data Analysis Agent","description":"Automated data processing and insights generation from structured datasets.","fullDescription":"An intelligent data analysis agent that processes structured data, identifies patterns, generates insights, and creates comprehensive reports. Perfect for analyzing sales data, user behavior, and business metrics.","previewImage":"/placeholder.svg?height=400&width=600","category":"Data Analysis","tags":["analytics","reporting","data","insights"],"complexity":"Advanced","useCase":"Automate data analysis workflows and generate actionable business insights","createdAt":"2025-01-08","setupInstructions":["Connect your data sources (databases, APIs, files)","Configure data schemas and mappings","Set up analysis parameters and KPIs","Configure report generation templates","Schedule automated analysis runs"],"configOptions":["Data source connections","Analysis frequency and triggers","Report format and delivery method","Visualization preferences","Alert thresholds for anomalies"],"relatedTemplates":["4","5"]},{"id":"3","slug":"content-moderator-agent","title":"Content Moderator Agent","description":"Automated content moderation for user-generated content across platforms.","fullDescription":"A robust content moderation agent that screens user-generated content for inappropriate material, spam, and policy violations. Uses advanced ML models to detect problematic content and maintain community standards.","previewImage":"/placeholder.svg?height=400&width=600","category":"Content Management","tags":["moderation","safety","content","automation"],"complexity":"Intermediate","useCase":"Maintain safe online communities by automatically detecting and flagging inappropriate content","createdAt":"2025-01-12","setupInstructions":["Define your content policies and guidelines","Configure moderation thresholds and actions","Set up webhook integrations with your platform","Train custom classifiers for domain-specific content","Configure human review workflows for edge cases"],"configOptions":["Moderation strictness levels","Content categories to monitor","Auto-action rules (flag, hide, delete)","Human review triggers","Reporting and analytics settings"],"relatedTemplates":["1"]},{"id":"4","slug":"marketing-campaign-agent","title":"Marketing Campaign Agent","description":"Automated campaign management, optimization, and performance tracking.","fullDescription":"A comprehensive marketing agent that plans, executes, and optimizes marketing campaigns across multiple channels. Analyzes performance metrics, adjusts targeting, and provides actionable recommendations.","previewImage":"/placeholder.svg?height=400&width=600","category":"Marketing","tags":["marketing","campaigns","automation","analytics"],"complexity":"Advanced","useCase":"Streamline marketing operations and improve campaign ROI through intelligent automation","createdAt":"2025-01-05","setupInstructions":["Connect your marketing platforms (email, social, ads)","Configure campaign templates and messaging","Set up audience segments and targeting rules","Define performance goals and KPIs","Configure A/B testing parameters"],"configOptions":["Supported marketing channels","Budget allocation strategies","Optimization algorithms","Reporting frequency and format","Integration with CRM and analytics tools"],"relatedTemplates":["2","5"]},{"id":"5","slug":"scheduling-coordinator-agent","title":"Scheduling Coordinator Agent","description":"Smart meeting scheduler that handles availability, conflicts, and preferences.","fullDescription":"An intelligent scheduling agent that coordinates meetings across multiple participants, respects time zones, manages calendar conflicts, and sends automated reminders. Integrates with popular calendar platforms.","previewImage":"/placeholder.svg?height=400&width=600","category":"Productivity","tags":["scheduling","calendar","meetings","automation"],"complexity":"Beginner","useCase":"Eliminate scheduling back-and-forth and automate meeting coordination","createdAt":"2025-01-15","setupInstructions":["Connect your calendar service (Google, Outlook, etc.)","Set your availability preferences and working hours","Configure meeting types and durations","Set up notification and reminder preferences","Add team members and their calendars"],"configOptions":["Working hours and availability windows","Buffer time between meetings","Meeting type templates","Notification channels and timing","Time zone handling preferences"],"relatedTemplates":["1","3"]},{"id":"6","slug":"create-linkedin-content-from-articles","title":"Create LinkedIn content from articles","description":"Turn long-form articles into LinkedIn posts in seconds. Save time and stay active on LinkedIn by consistently sharing valuable insights.","fullDescription":"Turn long-form articles into LinkedIn posts in seconds. Save time and stay active on LinkedIn by consistently sharing valuable insights.","previewImage":"/placeholder.svg?height=400&width=600","category":"Productivity","tags":["make ai content extractor","tools","make ai toolkit","gmail"],"complexity":"Intermediate","useCase":"Turn long-form articles into LinkedIn posts in seconds","createdAt":"2025-11-21","makeScenarioUrl":"https://eu2.make.com/public/shared-scenario/8MrnUpeVs8c/create-linked-in-content-from-articles","makeScenarioId":"8MrnUpeVs8c","makeIframeUrl":"https://eu2.make.com/public/shared-scenario/standalone-inspector-previewer/8MrnUpeVs8c","makeApps":["Make AI Content Extractor","Tools","Make AI Toolkit","Gmail"],"submittedBy":"anonymous","submittedAt":"2025-11-21T15:17:17.056Z","status":"published","aiEnhanced":true}]);}),
 "[project]/app/page.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
@@ -131,11 +131,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$data$2f$templates$2e$json__$
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/search.js [app-client] (ecmascript) <export default as Search>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/x.js [app-client] (ecmascript) <export default as X>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
-;
 ;
 ;
 ;
@@ -145,23 +143,7 @@ function Home() {
     _s();
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [selectedTags, setSelectedTags] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
-    const [isScrolled, setIsScrolled] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const templates = __TURBOPACK__imported__module__$5b$project$5d2f$data$2f$templates$2e$json__$28$json$29$__["default"];
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "Home.useEffect": ()=>{
-            const handleScroll = {
-                "Home.useEffect.handleScroll": ()=>{
-                    setIsScrolled(window.scrollY > 450);
-                }
-            }["Home.useEffect.handleScroll"];
-            window.addEventListener("scroll", handleScroll, {
-                passive: true
-            });
-            return ({
-                "Home.useEffect": ()=>window.removeEventListener("scroll", handleScroll)
-            })["Home.useEffect"];
-        }
-    }["Home.useEffect"], []);
     const categories = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "Home.useMemo[categories]": ()=>{
             const categoryMap = new Map();
@@ -265,7 +247,7 @@ function Home() {
                                                     className: "rounded-lg"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 95,
+                                                    lineNumber: 85,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -273,13 +255,13 @@ function Home() {
                                                     children: "Agent library"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 102,
+                                                    lineNumber: 92,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 94,
+                                            lineNumber: 84,
                                             columnNumber: 17
                                         }, this),
                                         isScrolled && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -293,33 +275,33 @@ function Home() {
                                                     className: "w-full pl-4 pr-10 py-2 bg-gray-200 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 109,
+                                                    lineNumber: 99,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {
                                                     className: "absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-600"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 116,
+                                                    lineNumber: 106,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 108,
+                                            lineNumber: 98,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
                                             className: "flex items-center gap-6"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 119,
+                                            lineNumber: 109,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 93,
+                                    lineNumber: 83,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -330,22 +312,22 @@ function Home() {
                                             children: "Why submit?"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 124,
+                                            lineNumber: 114,
                                             columnNumber: 17
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Link, {
                                             href: "/submit",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 className: "bg-gradient-to-b from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-purple-600/30",
                                                 children: "Submit"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 131,
+                                                lineNumber: 121,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 130,
+                                            lineNumber: 120,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -353,34 +335,34 @@ function Home() {
                                             children: "V"
                                         }, void 0, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 135,
+                                            lineNumber: 125,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 123,
+                                    lineNumber: 113,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 92,
+                            lineNumber: 82,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 91,
+                        lineNumber: 81,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 87,
+                    lineNumber: 77,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 86,
+                lineNumber: 76,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -401,12 +383,12 @@ function Home() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 147,
+                                lineNumber: 137,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 146,
+                            lineNumber: 136,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -417,7 +399,7 @@ function Home() {
                                     children: "Find. Deploy. Scale."
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 158,
+                                    lineNumber: 148,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -425,7 +407,7 @@ function Home() {
                                     children: "Make AI agents, ready to use."
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 161,
+                                    lineNumber: 151,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -444,13 +426,13 @@ function Home() {
                                                                 className: "h-4 w-4"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/page.tsx",
-                                                                lineNumber: 175,
+                                                                lineNumber: 165,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, tag, true, {
                                                         fileName: "[project]/app/page.tsx",
-                                                        lineNumber: 169,
+                                                        lineNumber: 159,
                                                         columnNumber: 21
                                                     }, this)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -461,7 +443,7 @@ function Home() {
                                                     className: "flex-1 min-w-[200px] bg-transparent border-none outline-none text-base text-white placeholder:text-gray-200 px-2"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 179,
+                                                    lineNumber: 169,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -474,12 +456,12 @@ function Home() {
                                                                 className: "h-5 w-5 text-gray-300"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/page.tsx",
-                                                                lineNumber: 193,
+                                                                lineNumber: 183,
                                                                 columnNumber: 25
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 189,
+                                                            lineNumber: 179,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -488,34 +470,34 @@ function Home() {
                                                                 className: "h-5 w-5 text-white"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/page.tsx",
-                                                                lineNumber: 197,
+                                                                lineNumber: 187,
                                                                 columnNumber: 23
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 196,
+                                                            lineNumber: 186,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 187,
+                                                    lineNumber: 177,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 167,
+                                            lineNumber: 157,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 166,
+                                        lineNumber: 156,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 165,
+                                    lineNumber: 155,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -530,7 +512,7 @@ function Home() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 205,
+                                            lineNumber: 195,
                                             columnNumber: 15
                                         }, this),
                                         categories.map(({ name, count })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -543,30 +525,30 @@ function Home() {
                                                 ]
                                             }, name, true, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 215,
+                                                lineNumber: 205,
                                                 columnNumber: 17
                                             }, this))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 204,
+                                    lineNumber: 194,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 157,
+                            lineNumber: 147,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 145,
+                    lineNumber: 135,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 144,
+                lineNumber: 134,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -583,7 +565,7 @@ function Home() {
                                         children: "Featured"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 235,
+                                        lineNumber: 225,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -591,13 +573,13 @@ function Home() {
                                         children: "Curated top picks from the community."
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 236,
+                                        lineNumber: 226,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 234,
+                                lineNumber: 224,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -606,18 +588,18 @@ function Home() {
                                         template: template
                                     }, template.id, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 240,
+                                        lineNumber: 230,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 238,
+                                lineNumber: 228,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 233,
+                        lineNumber: 223,
                         columnNumber: 11
                     }, this),
                     !searchQuery && templatesByCategory.length > 0 ? templatesByCategory.map(([category, categoryTemplates])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -633,7 +615,7 @@ function Home() {
                                                     children: category
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 251,
+                                                    lineNumber: 241,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -645,13 +627,13 @@ function Home() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 252,
+                                                    lineNumber: 242,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 250,
+                                            lineNumber: 240,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -664,19 +646,19 @@ function Home() {
                                                     children: "→"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 261,
+                                                    lineNumber: 251,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 256,
+                                            lineNumber: 246,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 249,
+                                    lineNumber: 239,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -685,18 +667,18 @@ function Home() {
                                             template: template
                                         }, template.id, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 266,
+                                            lineNumber: 256,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 264,
+                                    lineNumber: 254,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, category, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 248,
+                            lineNumber: 238,
                             columnNumber: 13
                         }, this)) : searchQuery && filteredTemplates.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
                         children: [
@@ -712,12 +694,12 @@ function Home() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 274,
+                                    lineNumber: 264,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 273,
+                                lineNumber: 263,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -726,18 +708,18 @@ function Home() {
                                         template: template
                                     }, template.id, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 280,
+                                        lineNumber: 270,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 278,
+                                lineNumber: 268,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 272,
+                        lineNumber: 262,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex flex-col items-center justify-center py-16 text-center",
@@ -747,7 +729,7 @@ function Home() {
                                 children: "No templates found"
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 286,
+                                lineNumber: 276,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -755,29 +737,29 @@ function Home() {
                                 children: "Try adjusting your search or filter criteria"
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 287,
+                                lineNumber: 277,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 285,
+                        lineNumber: 275,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 231,
+                lineNumber: 221,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 85,
+        lineNumber: 75,
         columnNumber: 5
     }, this);
 }
-_s(Home, "ZtcO5xP4QPnmFLEhHAZquAiTaz0=");
+_s(Home, "KOMs8Be7fjHhFyh6ltzWbJS6CyY=");
 _c = Home;
 var _c;
 __turbopack_context__.k.register(_c, "Home");

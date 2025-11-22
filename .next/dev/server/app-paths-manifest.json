@@ -1,7 +1,14 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/enhance-metadata/route": "app/api/enhance-metadata/route.js",
   "/api/proxy-image/route": "app/api/proxy-image/route.js",
+  "/api/publish/route": "app/api/publish/route.js",
   "/api/scrape/route": "app/api/scrape/route.js",
+  "/auth/callback/route": "app/auth/callback/route.js",
+  "/login/page": "app/login/page.js",
   "/page": "app/page.js",
+  "/profile/page": "app/profile/page.js",
   "/submit/page": "app/submit/page.js",
-  "/submit/preview/page": "app/submit/preview/page.js"
+  "/submit/preview/page": "app/submit/preview/page.js",
+  "/template/[slug]/page": "app/template/[slug]/page.js"
 }
