@@ -57,7 +57,7 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
 
   // Get related templates
   const relatedTemplates = templates.filter((t) =>
-    template.relatedTemplates.includes(t.id)
+    (template?.relatedTemplates || []).includes(t.id)
   )
 
   const templateUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com'}/template/${template.slug}`
