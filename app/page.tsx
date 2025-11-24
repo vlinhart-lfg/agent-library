@@ -1,18 +1,65 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { TemplateCard } from "@/components/template-card"
 import { SiteHeader } from "@/components/site-header"
 import { AgentTemplate } from "@/lib/types"
 import templatesData from "@/data/templates.json"
 import { Search, X } from 'lucide-react'
 import Image from 'next/image'
+import { createClient } from "@/lib/supabase/client"
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [dbTemplates, setDbTemplates] = useState<AgentTemplate[]>([])
 
-  const templates = templatesData as AgentTemplate[]
+  useEffect(() => {
+    const fetchTemplates = async () => {
+      const supabase = createClient()
+      const { data } = await supabase
+        .from('templates')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (data) {
+        const mappedTemplates = data.map((t: any) => ({
+          id: t.id,
+          title: t.title,
+          slug: t.slug,
+          description: t.description,
+          fullDescription: t.full_description || t.description,
+          category: t.category,
+          tags: t.tags || [],
+          complexity: t.complexity,
+          useCase: t.use_case || '',
+          previewImage: t.preview_image,
+          setupInstructions: t.instructions ? [t.instructions] : [],
+          configOptions: [],
+          relatedTemplates: [],
+          createdAt: t.created_at
+        }))
+        setDbTemplates(mappedTemplates)
+      }
+    }
+
+    fetchTemplates()
+  }, [])
+
+  const templates = useMemo(() => {
+    const localTemplates = templatesData as AgentTemplate[]
+    // Merge local and DB templates, preferring DB if slug matches (though IDs might differ)
+    // For now, just concat and maybe dedupe by slug if needed.
+    // Let's assume slugs are unique enough or just show both for now to ensure visibility.
+
+    // Filter out local templates that might be in DB to avoid duplicates if we had seeded them
+    // But since we haven't seeded, just combining them is fine.
+    // Actually, let's deduplicate by slug to be safe.
+    const allTemplates = [...dbTemplates, ...localTemplates]
+    const uniqueTemplates = Array.from(new Map(allTemplates.map(item => [item.slug, item])).values())
+
+    return uniqueTemplates
+  }, [dbTemplates])
 
   const categories = useMemo(() => {
     const categoryMap = new Map<string, number>()

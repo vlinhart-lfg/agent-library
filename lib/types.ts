@@ -12,9 +12,9 @@ export interface AgentTemplate {
   complexity: TemplateComplexity
   useCase: string
   createdAt: string
-  setupInstructions: string[]
-  configOptions: string[]
-  relatedTemplates: string[]
+  setupInstructions?: string[]
+  configOptions?: string[]
+  relatedTemplates?: string[]
 }
 
 export interface TemplateCategory {
