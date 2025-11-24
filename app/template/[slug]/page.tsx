@@ -14,10 +14,42 @@ interface TemplatePageProps {
   params: Promise<{ slug: string }>
 }
 
+import { createClient } from '@/lib/supabase/server'
+
 export default async function TemplatePage({ params }: TemplatePageProps) {
   const { slug } = await params
   const templates = templatesData as AgentTemplate[]
-  const template = templates.find((t) => t.slug === slug)
+  let template = templates.find((t) => t.slug === slug)
+
+  // If not found in JSON, check Supabase
+  if (!template) {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('templates')
+      .select('*')
+      .eq('slug', slug)
+      .single()
+
+    if (data) {
+      // Map Supabase data to AgentTemplate interface
+      template = {
+        id: data.id,
+        title: data.title,
+        slug: data.slug,
+        description: data.description,
+        fullDescription: data.full_description || data.description,
+        category: data.category,
+        tags: data.tags || [],
+        complexity: data.complexity,
+        useCase: data.use_case || '',
+        previewImage: data.preview_image,
+        setupInstructions: data.instructions ? [data.instructions] : [], // Wrap in array as interface expects string[]
+        configOptions: [], // Default empty
+        relatedTemplates: [], // Default empty
+        createdAt: data.created_at
+      } as AgentTemplate
+    }
+  }
 
   if (!template) {
     notFound()

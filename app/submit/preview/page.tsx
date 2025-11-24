@@ -55,8 +55,16 @@ export default function PreviewPage() {
             });
 
             if (!publishResponse.ok) {
-                const errorData = await publishResponse.json();
-                throw new Error(errorData.error || 'Failed to publish');
+                let errorMsg = 'Failed to publish';
+                try {
+                    const errorData = await publishResponse.json();
+                    errorMsg = errorData.error || errorMsg;
+                } catch (e) {
+                    // If JSON parsing fails, try to get text or use default
+                    const text = await publishResponse.text();
+                    errorMsg = text || `Server error: ${publishResponse.status}`;
+                }
+                throw new Error(errorMsg);
             }
 
             setSuccess(true);

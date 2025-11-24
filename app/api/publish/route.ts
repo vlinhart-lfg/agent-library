@@ -41,6 +41,11 @@ export async function POST(request: Request) {
 
     // Save to Supabase
     const supabase = await createClient();
+
+    // Get current user
+    const { data: { user } } = await supabase.auth.getUser();
+    const userId = user?.id;
+
     const { error: supabaseError } = await supabase
       .from('templates')
       .insert({
@@ -60,7 +65,8 @@ export async function POST(request: Request) {
         preview_image: '/placeholder.svg?height=400&width=600',
         status: 'published',
         ai_enhanced: true,
-        submitted_by: 'user' // We'll update this with real user ID if available
+        submitted_by: userId || 'anonymous', // Use real user ID or fallback
+        user_id: userId // Explicitly set user_id column if it exists (it should based on schema)
       });
 
     if (supabaseError) {
@@ -93,6 +99,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error: error.message || 'Failed to publish scenario. Please try again.',
+        details: error.toString()
       },
       { status: 500 }
     );
