@@ -15,6 +15,10 @@ export interface AgentTemplate {
   setupInstructions?: string[]
   configOptions?: string[]
   relatedTemplates?: string[]
+  makeApps?: string[]
+  makeScenarioUrl?: string
+  makeIframeUrl?: string
+  appIcons?: any[]
 }
 
 export interface TemplateCategory {
